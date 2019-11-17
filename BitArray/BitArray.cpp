@@ -3,33 +3,20 @@
 using namespace std;
 
 
-bool BitArray::isValidBit(int i)
+bool BitArray::isValidBit(int i)const
 {
 	return (i >= 0 && i < capacity);
 }
 
-unsigned long long BitArray::toBin(long long num)
+void BitArray::resize(int newCapacity)
 {
-	if (num < 0)
-		num = num * (-1);
-	unsigned long long bin = 0, n = num, ten = 1;
-	while (!(n % 2))
-	{
-		ten = ten * 10;
-		n = n / 2;
-	}
-	n = 0;
-	while (num)
-	{
-		n = (n * 10) + (num % 2);
-		num = num / 2;
-	}
-	while (n)
-	{
-		bin = (bin * 10) + (n % 10);
-		n = n / 10;
-	}
-	return bin * ten;
+	int s = (int)ceil((float)newCapacity / 8);
+	unsigned char * temp = new unsigned char[s];
+	for (int i = 0; i < s; i++)
+		temp[i] = data[i];
+	this->~BitArray();
+	capacity = newCapacity;
+	data = temp;
 }
 
 BitArray::BitArray(int n)
@@ -41,7 +28,6 @@ BitArray::BitArray(int n)
 		data[i] = data[i] & 0;
 }
 
-
 BitArray::~BitArray()
 {
 	if (!data)
@@ -51,7 +37,7 @@ BitArray::~BitArray()
 	data = nullptr;
 }
 
-int BitArray::getCapacity()
+int BitArray::getCapacity()const
 {
 	return capacity;
 }
@@ -75,7 +61,7 @@ void BitArray::off(int bitNo)
 	data[bitNo / 8] = data[bitNo / 8] & ~(1 << (bitNo % 8));
 }
 
-int BitArray::checkBitStatus(int bitNo)
+int BitArray::checkBitStatus(int bitNo)const
 {
 	return data[bitNo / 8] & (1 << (bitNo % 8));
 }
@@ -85,7 +71,7 @@ void BitArray::invert(int bitNo)
 	data[bitNo / 8] = data[bitNo / 8] ^ (1 << (bitNo % 8));
 }
 
-void BitArray::dump()
+void BitArray::dump()const
 {
 	for (int i = capacity - 1; i >= 0; i--)
 	{
@@ -98,7 +84,7 @@ void BitArray::dump()
 	}
 }
 
-void BitArray::dumpIEEE754()
+void BitArray::dumpIEEE754()const
 {
 	cout << "IEEE-754 Floating Point Value: ";
 	int i = capacity - 1;
@@ -162,48 +148,28 @@ unsigned long long BitArray::getUnSignedIntegralValue()
 	return result;
 }
 
-void BitArray::setIntegralValue(unsigned long long n)
+void BitArray::setIntegralValue(unsigned long long n) //non-negative numbers only
 {
-	////assuming that integral value is within the allocated range of bitarray
-	//if (n)
-	//	on(0);
-	//int bitCount = 1;
-	//while (getUnSignedIntegralValue() <= n)
-	//{
-	//	shiftLeft(1);
-	//	bitCount++;
-	//}
-	//shiftRight(1);
-	//bitCount--;
-	//for (int i = 0; i <= capacity/*getUnSignedIntegralValue() <= n*/; i++)
-	//{
-	//	on(i);
-	//	if (getUnSignedIntegralValue() > n)
-	//		off(i);
-	//}
-	unsigned long long binTemp = toBin(n), bits = 0;;
-	while (binTemp)
+	int newCapacity = 0;
+	for (unsigned long long int i = 1; i <= n; i = i * 2, newCapacity++);
+	resize(newCapacity);
+
+	for (int i = capacity; i >= 0; i--)
 	{
-		binTemp = binTemp / 10;
-		bits++;
+		on(i);
+		if (getUnSignedIntegralValue() > n)
+			off(i);
 	}
-	if (bits > capacity)
-	{
-		delete data;
-		data = nullptr;
-		//resize the bitarray
-		capacity = bits;
-		int s = (int)ceil((float)capacity / 8);
-		data = new unsigned char[s];
-		for (int i = 0; i < s; i++)
-			data[i] = data[i] & 0;
-	}
-	unsigned long long i = 0, bin = toBin(n);
-	while (bin)
-	{
-		if (bin % 10)
-			on(i);
-		bin = bin / 10;
-		i++;
-	}
+}
+
+BitArray::operator unsigned long long int() //non-negative numbers only
+{
+	return getUnSignedIntegralValue();
+}
+
+
+ostream & operator<<(ostream & coutBitArray, const BitArray & ba)
+{
+	ba.dump();
+	return coutBitArray;
 }
