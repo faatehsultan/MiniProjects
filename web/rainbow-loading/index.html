@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Loading</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    footer {
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: 'Verdana';
+      font-weight: bold;
+      font-size: 1em;
+      position: absolute;
+      bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- main content -->
+  <div class="rainbow-loading-container">
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <p class="text-shadow-shift">Developed by GITHUB.COM/FAATEHSULTAN</p>
+  </footer>
+
+  <!-- javascript -->
+  <script src="./api.js"></script>
+  <script>
+    startLoadingBar();
+  </script>
+</body>
+
+</html>
