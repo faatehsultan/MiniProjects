@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dot Circle Loading</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    :root {
+      height: 100%;
+      --color1: #eb4d4b;
+      --color2: #f9ca24;
+      --color3: #be2edd;
+      --color4: #22a6b3;
+      --color5: #4cd137;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      color: white;
+    }
+
+    footer {
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: 'Verdana';
+      font-weight: bold;
+      font-size: 1em;
+      position: absolute;
+      bottom: 30px;
+    }
+
+    /* css for main content */
+    .dot-circle-loading {
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      animation-name: rot_;
+      animation-duration: 1.5s;
+      animation-timing-function:ease-in-out;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes rot_ {
+      0% {
+        transform: rotate(0deg);
+      }
+      
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .dot {
+      background-color: white;
+      height: 5px;
+      width: 5px;
+      display: block;
+      border-radius: 100%;
+      position: absolute;
+      animation-name: color_shifter;
+      animation-duration: 7.5s;
+      animation-iteration-count: infinite; 
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes color_shifter {
+      0% {
+        box-shadow: 0px 0px 40px 20px var(--color1);
+      }
+      25% {
+        box-shadow: 0px 0px 40px 20px var(--color2);
+      }
+      50% {
+        box-shadow: 0px 0px 40px 20px var(--color3);
+      }
+      75% {
+        box-shadow: 0px 0px 40px 20px var(--color4);
+      }
+      100% {
+        box-shadow: 0px 0px 40px 20px var(--color5);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- main content -->
+  <div class="dot-circle-loading-container">
+    <!-- <div>' + headingText +'</div> -->
+    <div class="dot-circle-loading">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <p class="text-shadow-shift">Developed by GITHUB.COM/FAATEHSULTAN</p>
+  </footer>
+
+  <!-- javascript -->
+  <!-- <script src="https://cdn.jsdelivr.net/gh/faatehsultan/MiniProjects/web/rainbow-loading/api.js"></script> -->
+  <script>
+    //placing 8 dots on boundary of circle
+    let len = document.querySelector(".dot-circle-loading").offsetWidth / 2;
+    let radius = Math.floor(Math.sqrt(2 * (len * len)));
+    let dotLen = document.querySelector(".dot").offsetWidth;
+
+    document.querySelector(".dot:nth-child(1)").style.transform =
+      "translateX(" + (radius - dotLen - len) + "px) translateY(" + (radius - dotLen - len) + "px)";
+
+    document.querySelector(".dot:nth-child(2)").style.transform =
+      "translateX(" + (len * 2 - radius + dotLen + len) + "px) translateY(" + (radius - dotLen - len) + "px)";
+
+    document.querySelector(".dot:nth-child(3)").style.transform =
+      "translateX(" + (radius - dotLen - len) + "px) translateY(" + (len * 2 - radius + dotLen + len) + "px)";
+
+    document.querySelector(".dot:nth-child(4)").style.transform =
+      "translateX(" + (len * 2 - radius + dotLen + len) + "px) translateY(" + (len * 2 - radius + dotLen + len) + "px)";
+
+    document.querySelector(".dot:nth-child(5)").style.transform =
+      "translateX(" + len + "px)";
+
+    document.querySelector(".dot:nth-child(6)").style.transform =
+      "translateY(" + len + "px)";
+
+    document.querySelector(".dot:nth-child(7)").style.transform =
+      "translateX(" + (2*len) + "px) translateY(" + len + "px)";
+
+    document.querySelector(".dot:nth-child(8)").style.transform =
+      "translateX(" + len + "px) translateY(" + (2*len) + "px)";
+  </script>
+</body>
+
+</html>
