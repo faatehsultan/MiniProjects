@@ -224,22 +224,26 @@
             align-items: center;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
             position: relative;
-            opacity: 0;
-        }   
-
-        .showcase-item .text:hover {
-            animation-name: hover-dark-text-projects;
-            animation-fill-mode: forwards;
-            animation-duration: 0.6s;
-            animation-timing-function: linear;
+            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
         }
 
-        @keyframes hover-dark-text-projects {
-            0% {
-                opacity: 0;
+        @keyframes hover-dark-text-projects-in {
+            from {
+                clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
             }
-            100% {
-                opacity: 1;
+
+            to {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            }
+        }
+
+        @keyframes hover-dark-text-projects-out {
+            to {
+                clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+            }
+
+            from {
+                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
             }
         }
 
@@ -409,44 +413,44 @@
             <p class="small-paragraph">Here are our latest projects. You'll love them!</p>
         </div>
         <div class="showcase">
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/12/photo-1443890484047-5eaa67d1d630-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#15</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1422568374078-27d3842ba676-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#14</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1447834353189-91c48abf20e1-1-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#13</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/12/photo-1447877085163-3cce903855cd-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#12</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1447958374760-1ce70cf11ee3-1-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#11</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1430329429612-babb42f88673-1-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#10</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1449057528837-7ca097b3520c-1-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#9</div>
             </div>
-            <div class="showcase-item"
+            <div class="showcase-item" onmouseover="projTileMouseIn(this.firstElementChild);"
+                onmouseout="projTileMouseOut(this.firstElementChild);"
                 style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1449168013943-3a15804bb41c-1-1.jpg);">
-                <img src="" alt="">
                 <div class="text">Project#8</div>
             </div>
         </div>
@@ -502,6 +506,16 @@
 
     <!-- font awesome library -->
     <script src="https://kit.fontawesome.com/dad976447d.js" crossorigin="anonymous"></script>
+    <!-- mouse effect for project showcase items -->
+    <script>
+        let [name_in, name_out] = ["hover-dark-text-projects-in", "hover-dark-text-projects-out"];
+        const projTileMouseIn = (elem) => {
+            elem.style.animation = name_in + " 0.2s linear forwards";
+        }
+        const projTileMouseOut = (elem) => {
+            elem.style.animation = name_out + " 0.2s linear forwards";
+        }
+    </script>
 </body>
 
 </html>
