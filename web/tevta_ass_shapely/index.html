@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shapely - Assignment</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:wght@300;400&display=swap');
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .top-bar {
+            background-color: white;
+            height: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            z-index: 2;
+            box-shadow: 0px 0px 1px gray;
+        }
+
+        .logo {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.4em;
+            font-weight: 300;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-bar ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-bar ul li {
+            margin: 0px 12px;
+        }
+
+        .nav-bar ul li:hover {
+            color: purple;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .container-home {
+            flex-direction: column;
+            background-image: url("https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/photo-1443527216320-7e744084f5a7-1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+        }
+
+        .container-home heading {
+            font-size: 5em;
+        }
+
+        .btn {
+            margin: 20px 3px 0px 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .btn-purple {
+            background-color: #6c5ce7;
+            padding: 17px 65px;
+        }
+
+        .btn-purple:hover {
+            animation-name: btn-bg-purple-anim;
+            animation-fill-mode: forwards;
+            animation-duration: 0.5s;
+        }
+
+        .btn-white-border {
+            border: 2px solid #ffffff;
+            padding: 15px 50px;
+        }
+
+        .btn-white-border:hover {
+            animation-name: btn-bg-white-anim;
+            animation-fill-mode: forwards;
+            animation-duration: 0.5s;
+            color: #000000;
+        }
+
+        @keyframes btn-bg-white-anim {
+            0% {
+                background-color: transparent;
+            }
+
+            100% {
+                background-color: #ffffff;
+            }
+        }
+
+        @keyframes btn-bg-purple-anim {
+            0% {
+                background-color: #6c5ce7;
+            }
+
+            100% {
+                background-color: #594BBD;
+            }
+        }
+
+        .container-white-bg {
+            height: 80vh;
+            background-image: #ffffff;
+            color: #000000;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .small-heading {
+            font-size: 2em;
+        }
+
+        .container-white-bg .detail p {
+            width: 23vw;
+            opacity: 0.6;
+            font-size: 0.9em;
+            margin-top: 20px;
+            margin-bottom: 35px;
+            line-height: 25px;
+        }
+
+        .container-small-parallax {
+            flex-direction: column;
+            background-image: url(https://demo.colorlib.com/wp-content/uploads/sites/59/2016/12/photo-1452723312111-3a7d0db0e024.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #ffffff;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            height: 60vh;
+        }
+
+        .detail-narrow {
+            width: 70vw;
+            text-align: center;
+        }
+
+        .medium-heading {
+            font-size: 3.5em;
+        }
+
+        .small-paragraph {
+            margin-top: 30px;
+            margin-bottom: 45px;
+        }
+
+        #landscape-photo {
+            width: 75vw;
+            margin: 50px 0px 0px 0px;
+        }
+
+        .container-projects {
+            background-color: #0e1015;
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            flex-direction: column;
+            padding-top: 50px;
+        }
+
+        .showcase {
+            width: 100vw;
+            background-color: red;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .showcase-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 25vw;
+            height: 300px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .showcase-item .text {
+            font-size: 1.3em;
+            font-weight: bold;
+            z-index: 1;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+            position: relative;
+            opacity: 0;
+        }   
+
+        .showcase-item .text:hover {
+            animation-name: hover-dark-text-projects;
+            animation-fill-mode: forwards;
+            animation-duration: 0.6s;
+            animation-timing-function: linear;
+        }
+
+        @keyframes hover-dark-text-projects {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .container-reviews {
+            background-image: url(http://demo.colorlib.com/wp-content/uploads/sites/59/2016/12/photo-1451417379553-15d8e8f49cde.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 60vh;
+            color: white;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .reviewer-image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .reviewer-image-container img {
+            border-radius: 100%;
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .main-clients-img-tray {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .main-clients-img-tray img {
+            width: 75px;
+            display: block;
+            margin-left: 50px;
+            margin-right: 50px;
+            opacity: 0.4;
+        }
+
+        .main-clients-img-tray img:hover {
+            animation-name: opactiy-anim;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes opactiy-anim {
+            0% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .container-footer {
+            background-color: #0e1015;
+            height: 25vh;
+            margin-top: 50px;
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .container-footer ul {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 1.3em;
+        }
+
+        .container-footer ul li {
+            margin: 0px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- top bar -->
+    <div class="top-bar">
+        <div class="logo"><a href="#">Shapely Assignment</a></div>
+        <div class="nav-bar">
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">BLOG</a></li>
+                <li><a href="#">PORTFOLIO</a></li>
+                <li><a href="#">ABOUT TESTS</a></li>
+                <li><a href="#">LEVEL1</a></li>
+                <li><a href="#">SHOP</a></li>
+                <li><a href="#"><i class="fas fa-search"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- container home-->
+    <div class="container container-home">
+        <heading>Such a Nice Assignment</heading>
+        <span style="margin: 10px 0px 20px 0px">This is the coolest assignment in the world</span>
+        <div class="buttons">
+            <a href=""><span class="btn btn-purple">READ MORE</span></a>
+            <a href=""><span class="btn btn-white-border">DOWNLOAD NOW</span></a>
+        </div>
+    </div>
+
+    <!-- container white bg 1 -->
+    <div class="container container-white-bg">
+        <img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/macbook-preview-flexible.png"
+            width="650px">
+        <div class="detail">
+            <heading class="small-heading">SEO Friendly</heading>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar luctus sem, eget porta orci.
+                Maecenas molestie dui id diam feugiat, eu tincidunt mauris aliquam. Duis commodo vitae ligula et
+                interdum. Maecenas faucibus mattis imperdiet. In rhoncus ac ligula id ultricies.</p>
+            <a href=""><span class="btn btn-purple">READ MORE</span></a>
+        </div>
+    </div>
+
+    <!-- container white bg 2 -->
+    <div class="container container-white-bg" style="background-color: #f5f5f5;">
+        <div class="detail">
+            <heading class="small-heading">Portfolio Section</heading>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar luctus sem, eget porta orci.
+                Maecenas molestie dui id diam feugiat, eu tincidunt mauris aliquam. Duis commodo vitae ligula et
+                interdum. Maecenas faucibus mattis imperdiet. In rhoncus ac ligula id ultricies.</p>
+            <a href=""><span class="btn btn-purple">SEE IT IN ACTION</span></a>
+        </div>
+        <img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/flexible-portfolio.png" width="650px">
+    </div>
+
+    <!-- container small parallax -->
+    <div class="container container-small-parallax">
+        <div class="detail-narrow">
+            <heading class="medium-heading">Small Parallax Section</heading>
+            <p class="small-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar luctus sem,
+                eget porta orci.
+                Maecenas molestie dui id diam feugiat, eu tincidunt mauris aliquam. Duis commodo vitae ligula et
+                interdum. Maecenas faucibus mattis imperdiet. In rhoncus ac ligula id ultricies.</p>
+            <a href=""><span class="btn btn-purple">more info</span></a>
+        </div>
+    </div>
+
+    <!-- container white bg 3 -->
+    <div class="container container-white-bg"
+        style="background-color: #f5f5f5; flex-direction: column; height: auto; padding-top: 50px;">
+        <div class="detail-narrow">
+            <heading class="small-heading">Limitless Options</heading>
+            <p class="small-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar luctus sem,
+                eget porta orci.
+                Maecenas molestie dui id diam feugiat, eu tincidunt mauris aliquam. Duis commodo vitae ligula et
+                interdum. Maecenas faucibus mattis imperdiet. In rhoncus ac ligula id ultricies.</p>
+            <a href=""><span class="btn btn-purple">download now</span></a>
+        </div>
+        <img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/12/photo-1440557653082-e8e186733eeb-1.jpg"
+            alt="laptop-img" id="landscape-photo">
+    </div>
+
+    <!-- latest projects -->
+    <div class="container container-projects">
+        <div class="detail-narrow">
+            <heading class="small-heading">Our Latest Projects</heading>
+            <p class="small-paragraph">Here are our latest projects. You'll love them!</p>
+        </div>
+        <div class="showcase">
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/12/photo-1443890484047-5eaa67d1d630-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#15</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1422568374078-27d3842ba676-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#14</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1447834353189-91c48abf20e1-1-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#13</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/12/photo-1447877085163-3cce903855cd-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#12</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1447958374760-1ce70cf11ee3-1-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#11</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1430329429612-babb42f88673-1-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#10</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1449057528837-7ca097b3520c-1-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#9</div>
+            </div>
+            <div class="showcase-item"
+                style="background-image: url(https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/photo-1449168013943-3a15804bb41c-1-1.jpg);">
+                <img src="" alt="">
+                <div class="text">Project#8</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- client reviews -->
+    <div class="container container-reviews">
+        <i class="fas fa-chevron-left"></i>
+        <div class="detail-narrow">
+            <heading class="small-heading">Limitless Options</heading>
+            <p class="small-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pulvinar luctus sem,
+                eget porta orci.
+                Maecenas molestie dui id diam feugiat, eu tincidunt mauris aliquam. Duis commodo vitae ligula et
+                interdum. Maecenas faucibus mattis imperdiet. In rhoncus ac ligula id ultricies.</p>
+            <div class="reviewer-image-container">
+                <img
+                    src="https://demo.colorlib.com/shapely/wp-content/uploads/sites/59/2016/03/Aigars-Silkalns-150x150.jpg">
+                <span>Bhutto Jaani</span>
+            </div>
+        </div>
+        <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <!-- our main clients -->
+    <div class="container container-white-bg" style="height: 40vh; flex-direction: column;">
+        <heading class="small-heading">Our Main Clients</heading>
+        <div class="main-clients-img-tray">
+            <a href="#"><img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/colorlib-logo.png"></a>
+            <a href="#"><img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/js-logo.png"></a>
+            <a href="#"><img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/html5-logo.png"></a>
+            <a href="#"><img src="https://demo.colorlib.com/wp-content/uploads/sites/59/2016/03/css-logo.png"></a>
+        </div>
+    </div>
+
+    <!-- do you like this theme -->
+    <div class="container container-white-bg"
+        style="background-color: #f5f5f5; flex-direction: row; justify-content: space-evenly; height: auto; padding-top: 50px;">
+        <heading class="small-heading">Do you like this awesome WordPress theme?</heading>
+        <a href=""><span class="btn btn-purple">download now</span></a>
+    </div>
+
+    <!-- footer -->
+    <div class="container container-footer">
+        <p class="small-paragraph">Theme designed by <a href="https://github.com/faatehsultan/"
+                style="font-weight: bold;">Syed Faateh Sultan Kazmi</a></p>
+        <ul>
+            <li><i class="fab fa-facebook"></i></li>
+            <li><i class="fab fa-twitter"></i></li>
+            <li><i class="fab fa-instagram"></i></li>
+            <li><i class="fab fa-linkedin"></i></li>
+        </ul>
+    </div>
+
+    <!-- font awesome library -->
+    <script src="https://kit.fontawesome.com/dad976447d.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
