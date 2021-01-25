@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dropdown</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    :root {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to bottom, #1e272e, #2d3436);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dropdown-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dropdown-container i {
+      font-size: 4em;
+      text-shadow: 0px 0px 25px black;
+      cursor: pointer;
+      transform: translateY(-250px);
+    }
+
+    .dropdown-container .list {
+      list-style: none;
+      font-family: 'Verdana';
+      font-weight: bold;
+      display: none;
+      margin-top: -250px;
+    }
+
+    @keyframes dropdown-open {
+      from {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+      }
+
+      to {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      }
+    }
+
+    @keyframes dropdown-close {
+      from {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      }
+
+      to {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+      }
+    }
+
+    .dropdown-container .list li {
+      width: 200px;
+      height: 50px;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      border-radius: 10px;
+      font-size: 1.6em;
+      margin: 10px 0px;
+      box-shadow: 0px 0px 12px black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dropdown-container">
+    <i class="fas fa-bars" onclick="dropdown();"></i>
+    <div class="list">
+      <li>Home</li>
+      <li>Portfolio</li>
+      <li>About</li>
+      <li>Contact</li>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/dad976447d.js" crossorigin="anonymous"></script>
+  <script>
+    const dropdown = () => {
+      let list = document.querySelector(".dropdown-container .list");
+      if (document.defaultView.getComputedStyle(list, null).display == "none") {
+        list.style.animation = "dropdown-open 0.4s ease-in";
+        list.style.display = "block";
+      } else {
+        list.style.animation = "dropdown-close 0.4s ease-out";
+        setTimeout(() => {
+          list.style.display = "none";
+        }, 400);
+      }
+    }
+  </script>
+</body>
+
+</html>
