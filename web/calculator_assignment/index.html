@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
+    <title>JS Calculator</title>
+  </head>
+  <body>
+    <p class="heading">🔥 JS Calculator 🚀</p>
+    <div class="calculator">
+      <div class="calc_input_container">
+        <input type="text" class="calc_input" id="screen" value="0" readonly/>
+      </div>
+      <div class="calc_btn_container">
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          1
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          2
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          3
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          4
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          5
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          6
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          7
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          8
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          9
+        </button>
+        <button class="calc_btn btn_dig" onclick="appendDigToScreen(this);">
+          0
+        </button>
+      </div>
+      <div class="calc_btn_container">
+        <button class="calc_btn btn_op" onclick="appendPointToScreen();">
+          .
+        </button>
+        <button class="calc_btn btn_op" onclick="appendOpToScreen(this);">
+          +
+        </button>
+        <button class="calc_btn btn_op" onclick="appendOpToScreen(this);">
+          -
+        </button>
+        <button class="calc_btn btn_op" onclick="appendOpToScreen(this);">
+          *
+        </button>
+        <button class="calc_btn btn_op" onclick="appendOpToScreen(this);">
+          /
+        </button>
+        <button class="calc_btn btn_cls" onclick="clearScreen();">CLS</button>
+        <button class="calc_btn btn_bksp" onclick="backspace();">←</button>
+      </div>
+      <div class="calc_btn_container">
+        <button
+          class="calc_btn btn_eval"
+          onclick="evaluateExpression();"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span>😎</span>
+          <span style="font-size: 1.4em">=</span>
+          <span>😎</span>
+        </button>
+      </div>
+    </div>
+    <a class="footer" href="https://github.com/faatehsultan"
+      >Developed by Syed Faateh Sultan Kazmi (BCSF18M022)</a
+    >
+
+    <!-- external javascript -->
+    <script src="./assets/script/script.js"></script>
+  </body>
+</html>
